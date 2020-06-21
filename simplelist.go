@@ -9,6 +9,13 @@ type List struct {
 	next *List
 }
 
+func CreateList(data int) *List {
+	return &List{
+		data : data,
+		next : nil,
+	}
+}
+
 func (l *List) add(data int) {
 	v := &List{data : data,}
 
@@ -28,7 +35,7 @@ func (l *List) printList() {
 }
 
 func main() {
-	l := List{1, nil}
+	l := CreateList(2)
 	l.add(4)
 	l.add(4)
 	l.printList()
