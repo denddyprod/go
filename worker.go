@@ -33,3 +33,4 @@ func (w *Worker) process(c chan int) {
 		time.Sleep(time.Millisecond * 500)
 	}
 }
+
