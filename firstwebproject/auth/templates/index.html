@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Index Page - Home</title>
+	<meta name="description" content="An Index Page Display">
+	<meta name="author" content="Denis Belii">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://www.google.com/recaptcha/api.js"></script></script>
+</head>
+
+<body>
+	<center>
+		<form id="demo-form" method="post" action="/signup">
+			<label for="name">Username:</label><br>
+			<input type="text" placeholder="Enter Username" name="username" minlength="3" maxlength="20" size="15" required>
+            <br><br>
+			<label for="password">Password (min. 6 characters):</label>
+            <br>
+			<input type="password" placeholder="Enter Password" name="password" autocomplete="on" minlength="6" maxlength="35" size="15" required>
+            <br>
+			<input type="password" placeholder="Confirm Password" name="confirm" autocomplete="on" minlength="6" maxlength="35" size="15" required>
+            <br><br>
+			<label for="email">Email:</label><br>
+			<input type="email" placeholder="Enter Email" name="email" required>
+            <br>
+            <script>
+            function onSubmit(token) {
+                document.getElementById("g-token").value = token;
+                document.getElementById("demo-form").submit();
+            }
+            </script>
+			<br>
+            <button class="g-recaptcha" 
+            data-sitekey="{{.SiteKey}}"
+            data-callback='onSubmit' 
+            data-action='submit' >Sign Up</button>
+            <input type="hidden" id="g-token" name="g-token">
+		</form>
+
+		<br>
+		{{if gt (len .RegErrStr) 0}}
+		{{printf "%s" .RegErrStr}}
+		{{end}}
+		<br><br>
+		<form method="post" action="/login">
+			<label for="name">Username:</label><br>
+			<input type="text" placeholder="Enter Username" name="login_username" minlength="3" maxlength="20" required>
+            <br>
+			<label for="password">Password:</label><br>
+			<input type="password" placeholder="Enter Password" name="login_password" autocomplete="on" minlength="6" maxlength="35" required>
+            <br>
+			<button type="submit">Login</button>  
+		</form>
+		<br>
+		{{if gt (len .LogErrStr) 0}}
+		{{printf "%s" .LogErrStr}}
+		{{end}}
+
+		<br><br>
+
+		<form method="post" action="/forgotpassword">
+			<label for="forgot_email">Email:</label><br>
+			<input type="email" placeholder="Enter Email" name="forgot_email" required>
+            <br>
+			<button type="submit">Reset Password</button>  
+		</form>
+	</center>
+</body>
+
+</html>
